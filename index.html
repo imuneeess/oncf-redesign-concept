@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accueil · ONCF (redesign concept)</title>
+  <meta name="description" content="High-speed rail across Morocco. Unofficial ONCF redesign concept." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#07080b" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff7a1a'/%3E%3Cpath d='M-10 45 110 15M-10 70 110 40' stroke='%23111' stroke-width='9'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <div class="curtain" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="ribbon"><b>Unofficial redesign concept</b> by Imuneeess · not affiliated with or endorsed by ONCF · sample data</div>
+
+  <nav class="nav" aria-label="Main">
+    <a href="index.html" class="logo"><i class="logo-mark"></i>ONCF</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="al-boraq.html">Al Boraq</a></li>
+      <li><a href="horaires.html">Horaires</a></li>
+      <li><a href="reserver.html">Réserver</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="reserver.html" class="btn btn-primary">Réserver <span class="arrow">→</span></a>
+      <button class="burger" aria-label="Menu"><span></span></button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <canvas id="hero-canvas" class="webgl" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="tag">Prochain départ → <span class="flap flap-sm accent-text" data-flap-cycle="CASA VOYAGEURS|TANGER VILLE|RABAT AGDAL|KENITRA|MARRAKECH"></span></span>
+        <h1 class="split">Le Maroc, à <span class="accent">grande vitesse.</span></h1>
+        <p class="lead reveal" style="--d:.6s">Tanger to Casablanca in a little over two hours. Book in seconds, follow live departures, and travel the way the country moves now.</p>
+        <form id="quick" class="quick reveal" style="--d:.8s">
+          <select name="from" aria-label="Départ"><option selected>TANGER VILLE</option><option>KENITRA</option><option>RABAT AGDAL</option><option>RABAT VILLE</option><option>CASA VOYAGEURS</option><option>MARRAKECH</option><option>FES</option><option>OUJDA</option></select>
+          <select name="to" aria-label="Arrivée"><option>TANGER VILLE</option><option>KENITRA</option><option>RABAT AGDAL</option><option>RABAT VILLE</option><option selected>CASA VOYAGEURS</option><option>MARRAKECH</option><option>FES</option><option>OUJDA</option></select>
+          <button class="btn btn-primary" type="submit">Rechercher <span class="arrow">→</span></button>
+        </form>
+      </div>
+    </div>
+    <div class="speedo" aria-hidden="true"><b><span id="speed">0</span></b><small>KM/H</small></div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Ligne à grande vitesse</span>
+        <h2>Four stations. <span class="accent">One straight line.</span></h2>
+        <p>The Al Boraq line links the north and the economic capital with a dedicated high-speed section between Tanger and Kénitra.</p>
+      </div>
+      <div class="route reveal">
+        <div class="stop"><i></i><b>Tanger Ville</b><small>00:00</small></div>
+        <div class="stop"><i></i><b>Kénitra</b><small>~0:50</small></div>
+        <div class="stop"><i></i><b>Rabat Agdal</b><small>~1:20</small></div>
+        <div class="stop"><i></i><b>Casa Voyageurs</b><small>~2:10</small></div>
+      </div>
+      <p class="sample">Approximate sample durations. Verify against the official timetable.</p>
+    </div>
+  </section>
+
+  <div class="board-strip">
+    <div class="container grid grid-4">
+      <div class="stat reveal"><span class="flap flap-lg accent-text" data-flap="320"></span><small>km/h top speed (sample)</small></div>
+      <div class="stat reveal" style="--d:.1s"><span class="flap flap-lg" data-flap="2H10"></span><small>Tanger → Casa (sample)</small></div>
+      <div class="stat reveal" style="--d:.2s"><span class="flap flap-lg" data-flap="4"></span><small>Al Boraq stations</small></div>
+      <div class="stat reveal" style="--d:.3s"><span class="flap flap-lg" data-flap="24/7"></span><small>Online booking</small></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal"><span class="tag">Nos trains</span><h2>A train for <span class="accent">every journey.</span></h2></div>
+      <div class="grid grid-4">
+        <article class="card reveal"><span class="num-label">01</span><h3>Al Boraq</h3><p>High-speed service between Tanger, Kénitra, Rabat and Casablanca.</p></article>
+        <article class="card reveal" style="--d:.1s"><span class="num-label">02</span><h3>Al Atlas</h3><p>Intercity trains connecting Marrakech, Fès, Oujda and beyond.</p></article>
+        <article class="card reveal" style="--d:.2s"><span class="num-label">03</span><h3>TNR</h3><p>Fast shuttle trains for daily commutes along the Atlantic corridor.</p></article>
+        <article class="card reveal" style="--d:.3s"><span class="num-label">04</span><h3>Trains de nuit</h3><p>Overnight couchettes for long-distance trips, arrive rested.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta reveal">
+        <div>
+          <span class="tag">Départs en direct</span>
+          <h2>Check the board <span class="accent">before you leave.</span></h2>
+          <p class="lead">Live-style departures with platforms and delays, flipping just like the board in the station hall.</p>
+          <div class="hero-actions"><a href="horaires.html" class="btn btn-primary">Voir les horaires <span class="arrow">→</span></a></div>
+        </div>
+        <div style="position:relative;z-index:2;display:grid;gap:8px">
+          <span class="flap flap-lg" data-flap="06:00 TANGER"></span>
+          <span class="flap flap-lg accent-text" data-flap="07:00 CASA  "></span>
+          <span class="flap flap-lg" data-flap="08:00 RABAT "></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo"><i class="logo-mark"></i>ONCF</a>
+          <p style="margin-top:16px;max-width:340px">A concept for a faster, more cinematic ONCF website: high-speed travel and live departure boards.</p>
+        </div>
+        <div><h4>Voyager</h4><ul><li><a href="reserver.html">Réserver</a></li><li><a href="horaires.html">Horaires</a></li><li><a href="al-boraq.html">Al Boraq</a></li></ul></div>
+        <div><h4>Services</h4><ul><li><a href="reserver.html">Cartes de réduction</a></li><li><a href="contact.html">Assistance</a></li><li><a href="contact.html">Objets trouvés</a></li></ul></div>
+        <div><h4>Concept</h4><ul><li><a href="https://github.com/imuneeess/oncf-redesign-concept">Source on GitHub</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>Unofficial redesign concept by Imuneeess, created as a proposal for ONCF.</span>
+        <span>Not affiliated with or endorsed by ONCF. Schedules, fares, durations and figures are samples.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/flap.js"></script>
+  <script type="module" src="js/scenes/home.js"></script>
+</body>
+</html>

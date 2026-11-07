@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horaires · ONCF (redesign concept)</title>
+  <meta name="description" content="Live-style departure board. Unofficial ONCF redesign concept." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#07080b" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff7a1a'/%3E%3Cpath d='M-10 45 110 15M-10 70 110 40' stroke='%23111' stroke-width='9'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <div class="curtain" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="ribbon"><b>Unofficial redesign concept</b> by Imuneeess · not affiliated with or endorsed by ONCF · sample data</div>
+
+  <nav class="nav" aria-label="Main">
+    <a href="index.html" class="logo"><i class="logo-mark"></i>ONCF</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="al-boraq.html">Al Boraq</a></li>
+      <li><a href="horaires.html">Horaires</a></li>
+      <li><a href="reserver.html">Réserver</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="reserver.html" class="btn btn-primary">Réserver <span class="arrow">→</span></a>
+      <button class="burger" aria-label="Menu"><span></span></button>
+    </div>
+  </nav>
+
+  <header class="hero page-hero">
+    <canvas id="hero-canvas" class="webgl" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="tag">Départs</span>
+        <h1 class="split">Every train, <span class="accent">on the board.</span></h1>
+        <p class="lead reveal" style="--d:.6s">Filter by station and watch the board flip, just like in the station hall.</p>
+      </div>
+    </div>
+  </header>
+
+  <section style="padding-top:20px">
+    <div class="container">
+      <div class="board reveal" id="board">
+        <div class="board-head">
+          <div><span class="flap flap-lg accent-text" data-flap="DEPARTS"></span> <span id="count" style="color:var(--muted);font-family:var(--mono);font-size:.85rem;margin-left:10px"></span></div>
+          <div class="filters" role="tablist" aria-label="Station">
+            <button class="active" data-station="ALL">Toutes</button>
+            <button data-station="TANGER VILLE">Tanger</button>
+            <button data-station="RABAT AGDAL">Rabat</button>
+            <button data-station="CASA VOYAGEURS">Casa</button>
+            <button data-station="MARRAKECH">Marrakech</button>
+            <button data-station="FES">Fès</button>
+          </div>
+          <span class="flap flap-lg" data-clock aria-label="Heure"></span>
+        </div>
+        <table>
+          <thead><tr><th>HEURE</th><th>TRAIN</th><th>DESTINATION</th><th>VIA</th><th>N°</th><th>VOIE</th><th>STATUT</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="sample">Sample timetable for the concept. Not real-time and not official ONCF data.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo"><i class="logo-mark"></i>ONCF</a>
+          <p style="margin-top:16px;max-width:340px">A concept for a faster, more cinematic ONCF website: high-speed travel and live departure boards.</p>
+        </div>
+        <div><h4>Voyager</h4><ul><li><a href="reserver.html">Réserver</a></li><li><a href="horaires.html">Horaires</a></li><li><a href="al-boraq.html">Al Boraq</a></li></ul></div>
+        <div><h4>Services</h4><ul><li><a href="reserver.html">Cartes de réduction</a></li><li><a href="contact.html">Assistance</a></li><li><a href="contact.html">Objets trouvés</a></li></ul></div>
+        <div><h4>Concept</h4><ul><li><a href="https://github.com/imuneeess/oncf-redesign-concept">Source on GitHub</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>Unofficial redesign concept by Imuneeess, created as a proposal for ONCF.</span>
+        <span>Not affiliated with or endorsed by ONCF. Schedules, fares, durations and figures are samples.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/flap.js"></script>
+  <script type="module" src="js/scenes/horaires.js"></script>
+</body>
+</html>
