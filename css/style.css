@@ -491,3 +491,9 @@ html[lang="ar"] .lead, html[lang="ar"] p { line-height: 1.9; }
   .speedo b { font-size: 2.2rem; }
   .hero-shade, [dir="rtl"] .hero-shade { background: linear-gradient(180deg, rgba(7, 8, 11, 0.55) 0%, rgba(7, 8, 11, 0.85) 45%, rgba(7, 8, 11, 0.7) 100%); }
 }
+/* mid-size screens: keep the nav on one line */
+@media (max-width: 1180px) and (min-width: 761px) {
+  .nav-cta .btn { display: none; }
+  .nav-links a { padding: 9px 10px; font-size: 0.88rem; white-space: nowrap; }
+}
+.btn { white-space: nowrap; }
