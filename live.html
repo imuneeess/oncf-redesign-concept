@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live tracker · ONCF (redesign concept)</title>
+  <meta name="i18n-title" content="livep.title" />
+  <meta name="description" content="Live train tracker. Unofficial ONCF redesign concept." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#07080b" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff7a1a'/%3E%3Cpath d='M-10 45 110 15M-10 70 110 40' stroke='%23111' stroke-width='9'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    } }
+  </script>
+  <script>try{var l=localStorage.getItem('oncf-lang');if(l==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl'}else if(l)document.documentElement.lang=l}catch(e){}</script>
+</head>
+<body>
+  <div class="curtain" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="progress" aria-hidden="true"></div>
+  <div data-i18n="ribbon" class="ribbon"><b>Unofficial redesign concept</b> by Imuneeess · not affiliated with or endorsed by ONCF · simulated data</div>
+
+  <nav class="nav" aria-label="Main">
+    <a href="index.html" class="logo"><i class="logo-mark"></i>ONCF</a>
+    <ul class="nav-links">
+      <li><a data-i18n="nav.home" href="index.html">Home</a></li>
+      <li><a href="live.html" class="nav-live"><i class="pulse"></i><span data-i18n="nav.live">Live</span></a></li>
+      <li><a data-i18n="nav.boraq" href="al-boraq.html">Al Boraq</a></li>
+      <li><a data-i18n="nav.times" href="horaires.html">Timetable</a></li>
+      <li><a data-i18n="nav.book" href="reserver.html">Book</a></li>
+      <li><a data-i18n="nav.contact" href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <div class="lang" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="ar">ع</button></div>
+      <a href="reserver.html" class="btn btn-primary"><span data-i18n="cta.book">Book a ticket</span> <span class="arrow">→</span></a>
+      <button class="burger" aria-label="Menu"><span></span></button>
+    </div>
+  </nav>
+
+  <main class="container live-page">
+    <div class="live-top">
+      <div>
+        <span class="tag"><i class="pulse"></i> <span data-i18n="live.badge">LIVE</span></span>
+        <h1 data-i18n="livep.h1" class="split" style="font-size:clamp(2.4rem,5vw,4.2rem);margin:6px 0 10px">Live <span class="accent">tracker.</span></h1>
+        <p data-i18n="livep.p" class="lead">Click any train on the map or in the list to see where it is, its speed, delay and every stop.</p>
+      </div>
+      <div class="live-ctrl card">
+        <span class="sim"><small id="mode-label" data-i18n="livep.timelapse">Time-lapse</small><b id="sim-clock">--:--</b></span>
+        <div class="speeds"><button data-speed="1">×1</button><button data-speed="10">×10</button><button data-speed="30" class="active">×30</button><button data-speed="120">×120</button></div>
+      </div>
+    </div>
+    <div class="live-layout">
+      <div class="map-card big">
+        <canvas id="net-canvas" aria-label="Live network map"></canvas>
+        <div data-i18n="live.legend" class="legend"><i class="lg boraq"></i>Al Boraq <i class="lg atlas"></i>Al Atlas <i class="lg tnr"></i>TNR <i class="lg night"></i>Night <i class="lg late"></i>Delayed</div>
+        <div class="map-kpis"><span><b data-kpi="running">0</b> <small data-i18n="kpi.running">trains running</small></span><span><b data-kpi="pct" class="ok">0%</b> <small data-i18n="kpi.pct">on time</small></span><span><b data-kpi="late" class="late">0</b> <small data-i18n="kpi.late">delayed</small></span></div>
+      </div>
+      <aside class="live-panel">
+        <div class="card">
+          <div class="filters"><button class="active" data-filter="all" data-i18n="livep.all">All</button><button data-filter="boraq" data-i18n="type.boraq">Al Boraq</button><button data-filter="atlas" data-i18n="type.atlas">Al Atlas</button><button data-filter="tnr" data-i18n="type.tnr">TNR</button><button data-filter="night" data-i18n="type.night">Night</button></div>
+          <div id="train-detail" class="detail"></div>
+        </div>
+        <div class="card list-card">
+          <div class="list-head"><b id="list-count">0</b> <span data-i18n="livep.onnet">trains on the network</span></div>
+          <div id="train-list" class="train-list"></div>
+        </div>
+      </aside>
+    </div>
+    <p data-i18n="livep.note" class="sample">Simulated from a sample timetable on Casablanca time. Not real-time ONCF data.</p>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo"><i class="logo-mark"></i>ONCF</a>
+          <p data-i18n="ft.about" style="margin-top:16px;max-width:360px">A concept for a faster, more cinematic ONCF website: high-speed travel, live trains and flip boards.</p>
+        </div>
+        <div><h4 data-i18n="ft.travel">Travel</h4><ul><li><a data-i18n="nav.book" href="reserver.html">Book</a></li><li><a data-i18n="nav.times" href="horaires.html">Timetable</a></li><li><a data-i18n="nav.live" href="live.html">Live</a></li><li><a data-i18n="nav.boraq" href="al-boraq.html">Al Boraq</a></li></ul></div>
+        <div><h4 data-i18n="ft.services">Services</h4><ul><li><a data-i18n="ft.cards" href="reserver.html">Discount cards</a></li><li><a data-i18n="ft.help" href="contact.html">Assistance</a></li><li><a data-i18n="ft.lost" href="contact.html">Lost property</a></li></ul></div>
+        <div><h4 data-i18n="ft.concept">Concept</h4><ul><li><a data-i18n="ft.source" href="https://github.com/imuneeess/oncf-redesign-concept">Source on GitHub</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span data-i18n="ft.l">Unofficial redesign concept by Imuneeess, created as a proposal for ONCF.</span><span data-i18n="ft.r">Not affiliated with or endorsed by ONCF. Timetables, fares, live positions and figures are simulated.</span></div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/i18n.js"></script>
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/flap.js"></script>
+  <script type="module" src="js/live-ui.js"></script>
+  <script type="module" src="js/scenes/livepage.js"></script>
+</body>
+</html>

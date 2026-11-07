@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact · ONCF (redesign concept)</title>
+  <meta name="i18n-title" content="ct.title" />
   <meta name="description" content="Contact and assistance. Unofficial ONCF redesign concept." />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="theme-color" content="#07080b" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ff7a1a'/%3E%3Cpath d='M-10 45 110 15M-10 70 110 40' stroke='%23111' stroke-width='9'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script type="importmap">
     { "imports": {
@@ -18,23 +19,26 @@
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
     } }
   </script>
+  <script>try{var l=localStorage.getItem('oncf-lang');if(l==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl'}else if(l)document.documentElement.lang=l}catch(e){}</script>
 </head>
 <body>
   <div class="curtain" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   <div class="progress" aria-hidden="true"></div>
-  <div class="ribbon"><b>Unofficial redesign concept</b> by Imuneeess · not affiliated with or endorsed by ONCF · sample data</div>
+  <div data-i18n="ribbon" class="ribbon"><b>Unofficial redesign concept</b> by Imuneeess · not affiliated with or endorsed by ONCF · simulated data</div>
 
   <nav class="nav" aria-label="Main">
     <a href="index.html" class="logo"><i class="logo-mark"></i>ONCF</a>
     <ul class="nav-links">
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="al-boraq.html">Al Boraq</a></li>
-      <li><a href="horaires.html">Horaires</a></li>
-      <li><a href="reserver.html">Réserver</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a data-i18n="nav.home" href="index.html">Home</a></li>
+      <li><a href="live.html" class="nav-live"><i class="pulse"></i><span data-i18n="nav.live">Live</span></a></li>
+      <li><a data-i18n="nav.boraq" href="al-boraq.html">Al Boraq</a></li>
+      <li><a data-i18n="nav.times" href="horaires.html">Timetable</a></li>
+      <li><a data-i18n="nav.book" href="reserver.html">Book</a></li>
+      <li><a data-i18n="nav.contact" href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="reserver.html" class="btn btn-primary">Réserver <span class="arrow">→</span></a>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="fr">FR</button><button data-lang="ar">ع</button></div>
+      <a href="reserver.html" class="btn btn-primary"><span data-i18n="cta.book">Book a ticket</span> <span class="arrow">→</span></a>
       <button class="burger" aria-label="Menu"><span></span></button>
     </div>
   </nav>
@@ -42,47 +46,46 @@
   <canvas id="bg-canvas" class="webgl" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.55"></canvas>
   <main class="container contact-wrap">
     <div>
-      <span class="tag">Assistance</span>
-      <h1 style="font-size:clamp(2.4rem,5vw,4.2rem)"><span class="flap flap-xl accent-text" data-flap-cycle="BONJOUR|MARHBA|AZUL|HELLO"></span><br />How can we help?</h1>
-      <p class="lead">Questions about a booking, a refund or lost property? Write to us and we'll get back to you.</p>
+      <span data-i18n="ct.tag" class="tag">Assistance</span>
+      <h1 style="font-size:clamp(2.4rem,5vw,4.2rem)"><span class="flap flap-xl accent-text" data-flap-cycle-key="ct.hello"></span><br /><span data-i18n="ct.h1">How can we help?</span></h1>
+      <p data-i18n="ct.p" class="lead">Questions about a booking, a refund or lost property? Write to us and we'll get back to you.</p>
       <div class="grid" style="margin-top:28px">
-        <div class="card"><span class="num-label">FAQ</span><h3>Can I change my ticket?</h3><p>Sample answer: changes are possible until departure, depending on the fare.</p></div>
-        <div class="card"><span class="num-label">FAQ</span><h3>Are there discount cards?</h3><p>Sample answer: youth, senior and loyalty cards offer reduced fares.</p></div>
+        <div class="card"><span class="num-label">FAQ</span><h3 data-i18n="ct.q1">Can I change my ticket?</h3><p data-i18n="ct.a1">Sample answer: changes are possible until departure, depending on the fare.</p></div>
+        <div class="card"><span class="num-label">FAQ</span><h3 data-i18n="ct.q2">Are there discount cards?</h3><p data-i18n="ct.a2">Sample answer: youth, senior and loyalty cards offer reduced fares.</p></div>
       </div>
     </div>
     <form id="contact-form" class="form reveal" style="--d:.2s">
       <div class="row2">
-        <div class="field"><label for="c-name">Nom</label><input id="c-name" required /></div>
-        <div class="field"><label for="c-mail">Email</label><input id="c-mail" type="email" required /></div>
+        <div class="field"><label for="c-name" data-i18n="ct.name">Name</label><input id="c-name" required /></div>
+        <div class="field"><label for="c-mail" data-i18n="ct.mail">Email</label><input id="c-mail" type="email" required /></div>
       </div>
-      <div class="field"><label for="c-topic">Sujet</label><select id="c-topic"><option>Réservation</option><option>Remboursement</option><option>Objets trouvés</option><option>Autre</option></select></div>
-      <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea></div>
-      <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">Envoyer <span class="arrow">→</span></button>
-      <p class="note">Demo form: nothing is sent anywhere.</p>
+      <div class="field"><label for="c-topic" data-i18n="ct.topic">Topic</label><select id="c-topic"><option data-i18n="ct.t1">Booking</option><option data-i18n="ct.t2">Refund</option><option data-i18n="ct.t3">Lost property</option><option data-i18n="ct.t4">Other</option></select></div>
+      <div class="field"><label for="c-msg" data-i18n="ct.msg">Message</label><textarea id="c-msg" required></textarea></div>
+      <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center"><span data-i18n="ct.send">Send</span> <span class="arrow">→</span></button>
+      <p data-i18n="ct.demo" class="note">Demo form: nothing is sent anywhere.</p>
     </form>
   </main>
-  <div class="toast" role="status">Merci ! (Demo: your message stayed in your browser.)</div>
+  <div data-i18n="ct.toast" class="toast" role="status">Thank you! (Demo: your message stayed in your browser.)</div>
 
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div>
           <a href="index.html" class="logo"><i class="logo-mark"></i>ONCF</a>
-          <p style="margin-top:16px;max-width:340px">A concept for a faster, more cinematic ONCF website: high-speed travel and live departure boards.</p>
+          <p data-i18n="ft.about" style="margin-top:16px;max-width:360px">A concept for a faster, more cinematic ONCF website: high-speed travel, live trains and flip boards.</p>
         </div>
-        <div><h4>Voyager</h4><ul><li><a href="reserver.html">Réserver</a></li><li><a href="horaires.html">Horaires</a></li><li><a href="al-boraq.html">Al Boraq</a></li></ul></div>
-        <div><h4>Services</h4><ul><li><a href="reserver.html">Cartes de réduction</a></li><li><a href="contact.html">Assistance</a></li><li><a href="contact.html">Objets trouvés</a></li></ul></div>
-        <div><h4>Concept</h4><ul><li><a href="https://github.com/imuneeess/oncf-redesign-concept">Source on GitHub</a></li></ul></div>
+        <div><h4 data-i18n="ft.travel">Travel</h4><ul><li><a data-i18n="nav.book" href="reserver.html">Book</a></li><li><a data-i18n="nav.times" href="horaires.html">Timetable</a></li><li><a data-i18n="nav.live" href="live.html">Live</a></li><li><a data-i18n="nav.boraq" href="al-boraq.html">Al Boraq</a></li></ul></div>
+        <div><h4 data-i18n="ft.services">Services</h4><ul><li><a data-i18n="ft.cards" href="reserver.html">Discount cards</a></li><li><a data-i18n="ft.help" href="contact.html">Assistance</a></li><li><a data-i18n="ft.lost" href="contact.html">Lost property</a></li></ul></div>
+        <div><h4 data-i18n="ft.concept">Concept</h4><ul><li><a data-i18n="ft.source" href="https://github.com/imuneeess/oncf-redesign-concept">Source on GitHub</a></li></ul></div>
       </div>
-      <div class="footer-bottom">
-        <span>Unofficial redesign concept by Imuneeess, created as a proposal for ONCF.</span>
-        <span>Not affiliated with or endorsed by ONCF. Schedules, fares, durations and figures are samples.</span>
-      </div>
+      <div class="footer-bottom"><span data-i18n="ft.l">Unofficial redesign concept by Imuneeess, created as a proposal for ONCF.</span><span data-i18n="ft.r">Not affiliated with or endorsed by ONCF. Timetables, fares, live positions and figures are simulated.</span></div>
     </div>
   </footer>
 
+  <script type="module" src="js/i18n.js"></script>
   <script src="js/main.js" defer></script>
   <script type="module" src="js/flap.js"></script>
+  <script type="module" src="js/live-ui.js"></script>
   <script type="module" src="js/scenes/contact.js"></script>
 </body>
 </html>

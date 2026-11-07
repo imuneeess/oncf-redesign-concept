@@ -1,4 +1,7 @@
 import { THREE, createStage, addLights, createTrain, ACCENT } from './common.js';
+import { trainsAt, moroccoNow, fmt } from '../live.js';
+import { t, station } from '../i18n.js';
+import { statusText } from '../live-ui.js';
 
 // ---------- Showroom: train on a turntable, drag to rotate ----------
 const canvas = document.querySelector('#show-canvas');
@@ -58,3 +61,21 @@ const io = new IntersectionObserver((entries) => entries.forEach((en) => {
   io.unobserve(el);
 }), { threshold: 0.5 });
 document.querySelectorAll('[data-to]').forEach((el) => io.observe(el));
+
+// ---------- Live: every Al Boraq on the line right now ----------
+const liveEl = document.querySelector('#boraq-live');
+function renderLive() {
+  const list = trainsAt(moroccoNow()).filter((x) => x.type === 'boraq' && x.rel >= -8 && x.rel < x.total).sort((a, b) => a.dep - b.dep);
+  liveEl.innerHTML = list.length ? list.map((tr) => {
+    const ticks = tr.stops.map(([c, m]) => `<span class="tick ${tr.rel >= m ? 'on' : ''}" style="inset-inline-start:${(m / tr.total) * 100}%"><i></i><small>${station(c)}</small></span>`).join('');
+    return `<article class="card bl">
+      <div class="bl-head"><b>Al Boraq ${tr.no}</b><span class="badge ${tr.delay ? 'late' : 'ok'}">${statusText(tr)}</span></div>
+      <div class="bl-route">${station(tr.from)} → ${station(tr.to)} · ${t('livep.arrival')} ${fmt(tr.arr)}</div>
+      <div class="bl-line"><span class="bl-fill" style="width:${(tr.progress * 100).toFixed(1)}%"></span>${ticks}<span class="bl-train" style="inset-inline-start:${(tr.progress * 100).toFixed(1)}%"></span></div>
+      <div class="bl-meta"><span><small>${t('livep.speed')}</small><b>${tr.speed} km/h</b></span><span><small>${t('livep.next')}</small><b>${station(tr.nextStop)}</b></span><span><small>${t('livep.platform')}</small><b>${tr.platform}</b></span></div>
+    </article>`;
+  }).join('') : `<p class="empty">${t('livep.none')}</p>`;
+}
+renderLive();
+setInterval(renderLive, 3000);
+window.addEventListener('langchange', renderLive);
